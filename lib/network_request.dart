@@ -12,8 +12,7 @@ class NetReq {
   }
 
   NetReq._internal() {
-    _dio = Dio(BaseOptions(
-        baseUrl: _baseUrl, connectTimeout: 3000, receiveTimeout: 3000));
+    _dio = Dio(BaseOptions(baseUrl: _baseUrl));
   }
 
   Future<Response> get({@required String path}) {
