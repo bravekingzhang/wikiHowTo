@@ -5,6 +5,7 @@ Wiki How to 的中文版本，觉得挺有意思的，希望大家一起把这�
 ## 介绍
 
 
+##### 可以扫码这个二维码体验
 
 ![添加二维码体验](https://github.com/bravekingzhang/wikiHowTo/blob/master/art/1583063972.png)
 
@@ -18,11 +19,11 @@ Wiki How to 的中文版本，觉得挺有意思的，希望大家一起把这�
 7、支持从收藏移除
 8、对请求做了缓存，先请求缓存，在请求网络。
 
-<img title="" src="https://github.com/bravekingzhang/wikiHowTo/blob/master/art/feature.png" alt="" data-align="center" width="616">
-<img title="" src="https://github.com/bravekingzhang/wikiHowTo/blob/master/art/menu.png" alt="" data-align="center" width="616">
-<img title="" src="https://github.com/bravekingzhang/wikiHowTo/blob/master/art/collect.png" alt="" data-align="center" width="616">
-<img title="" src="https://github.com/bravekingzhang/wikiHowTo/blob/master/art/search.png" alt="" data-align="center" width="616">
-<img title="" src="https://github.com/bravekingzhang/wikiHowTo/blob/master/art/detail.png" alt="" data-align="center" width="616">
+<img title="" src="https://github.com/bravekingzhang/wikiHowTo/blob/master/art/feature.png" alt="" data-align="center" width="516">
+<img title="" src="https://github.com/bravekingzhang/wikiHowTo/blob/master/art/menu.png" alt="" data-align="center" width="516">
+<img title="" src="https://github.com/bravekingzhang/wikiHowTo/blob/master/art/collect.png" alt="" data-align="center" width="516">
+<img title="" src="https://github.com/bravekingzhang/wikiHowTo/blob/master/art/search.png" alt="" data-align="center" width="516">
+<img title="" src="https://github.com/bravekingzhang/wikiHowTo/blob/master/art/detail.png" alt="" data-align="center" width="516">
 
 ![添加二维码体验](https://github.com/bravekingzhang/wikiHowTo/blob/master/art/detail.gif)
 
