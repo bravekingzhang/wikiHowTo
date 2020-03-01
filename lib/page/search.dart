@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
@@ -61,6 +62,26 @@ class _SearchState extends State<Search> {
                           (BuildContext context, int index) {
                         return Center(child: CircularProgressIndicator());
                       }, childCount: 1));
+                case EmptyState:
+                  return SliverFixedExtentList(
+                    itemExtent:
+                        window.physicalSize.height / window.devicePixelRatio -
+                            70,
+                    delegate: SliverChildBuilderDelegate(
+                        (BuildContext context, int index) {
+                      return Center(
+                          child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Image.asset('images/empty.png'),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text('没有匹配到任何项目~~')
+                        ],
+                      ));
+                    }, childCount: 1),
+                  );
                 case SuccessState:
                   SuccessState successState = state;
                   return SliverFixedExtentList(
@@ -68,7 +89,8 @@ class _SearchState extends State<Search> {
                     delegate: SliverChildBuilderDelegate(
                         (BuildContext context, int index) {
                       return Container(
-                        decoration: BoxDecoration(border: Border(bottom: BorderSide())),
+                        decoration:
+                            BoxDecoration(border: Border(bottom: BorderSide())),
                         child: ListTile(
                           contentPadding: EdgeInsets.fromLTRB(8, 6, 0, 8),
                           dense: true,

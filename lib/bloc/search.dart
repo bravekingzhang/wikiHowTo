@@ -10,6 +10,7 @@ class SearchBloc extends BaseBloc {
   Stream<BaseState> mapEventToState(BaseEvent event) async* {
     switch (event.runtimeType) {
       case SearchQEvent:
+        yield LoadingState();
         SearchQEvent searchEvent = event;
 
         var path =
@@ -19,8 +20,12 @@ class SearchBloc extends BaseBloc {
         Response response = await NetReq().getCache(path: path);
         if (response.statusCode == 200) {
           try {
-            print("命中缓存");
-            yield SuccessState(SearchResponse.fromJson(response.data));
+            SearchResponse searchResponse = SearchResponse.fromJson(response.data);
+            if(searchResponse.response.numFound==0){
+              yield EmptyState();
+            }else{
+              yield SuccessState(SearchResponse.fromJson(response.data));
+            }
           } catch (e) {}
         }
 
@@ -29,7 +34,12 @@ class SearchBloc extends BaseBloc {
 
         if (response.statusCode == 200) {
           try {
-            yield SuccessState(SearchResponse.fromJson(response.data));
+            SearchResponse searchResponse =  SearchResponse.fromJson(response.data);
+            if(searchResponse.response.numFound==0){
+              yield EmptyState();
+            }else{
+              yield SuccessState(searchResponse);
+            }
           } catch (e) {
             yield ErrorState(msg: e.toString());
           }
@@ -82,6 +92,9 @@ class SearchQEvent extends BaseEvent {
   SearchQEvent.init(this.key);
 }
 
+class EmptyState extends BaseState{
+
+}
 class SuccessState extends BaseState {
   SearchResponse response;
 

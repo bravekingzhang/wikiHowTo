@@ -4,6 +4,8 @@ Wiki How to 的中文版本，觉得挺有意思的，希望大家一起把这�
 
 ## 介绍
 
+![添加二维码体验](https://github.com/bravekingzhang/wikiHowTo/blob/master/art/1583063972.png)
+
 目前支持的功能有：
 1、支持显示推荐列表
 2、支持搜索，但是只能搜索到英文的，因为api不支持搜索到中文的
@@ -14,7 +16,12 @@ Wiki How to 的中文版本，觉得挺有意思的，希望大家一起把这�
 7、支持从收藏移除
 8、对请求做了缓存，先请求缓存，在请求网络。
 
-
+![添加二维码体验](https://github.com/bravekingzhang/wikiHowTo/blob/master/art/feature.png)
+![添加二维码体验](https://github.com/bravekingzhang/wikiHowTo/blob/master/art/menu.png)
+![添加二维码体验](https://github.com/bravekingzhang/wikiHowTo/blob/master/art/collect.png)
+![添加二维码体验](https://github.com/bravekingzhang/wikiHowTo/blob/master/art/search.png)
+![添加二维码体验](https://github.com/bravekingzhang/wikiHowTo/blob/master/art/detail.png)
+![添加二维码体验](https://github.com/bravekingzhang/wikiHowTo/blob/master/art/detail.gif)
 
 
 

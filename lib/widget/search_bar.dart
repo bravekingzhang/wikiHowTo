@@ -17,7 +17,7 @@ class SearchBar extends StatefulWidget implements PreferredSizeWidget {
 
 class _SearchBarState extends State<SearchBar> {
   final TextEditingController _controller = TextEditingController();
-  final _deBouncer = Debouncer<String>(Duration(milliseconds: 200));
+  final _deBouncer = Debouncer<String>(Duration(milliseconds: 500));
 
   @override
   void initState() {
