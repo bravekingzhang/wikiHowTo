@@ -37,7 +37,7 @@ class WiKiItem extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 article.abstract,
-                style: textSubTitle,
+                style: textBodyHint,
               ),
             )
           ],

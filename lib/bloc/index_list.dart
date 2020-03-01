@@ -9,15 +9,23 @@ class IndexListBloc extends BaseBloc {
     switch (event.runtimeType) {
       case RefreshEvent:
         RefreshEvent refreshEvent = event;
-        print("mapEventToState");
-        Response response = await NetReq().get(
-            path:
-                '/api.php?action=app&subcmd=featured&num=${refreshEvent.num}&format=json');
 
-        if (response.statusCode == 200) {
-          try{
+        var path =
+            '/api.php?action=app&subcmd=featured&num=${refreshEvent.num}&format=json';
+        ///先请求缓存
+        Response response = await NetReq().getCache(path: path);
+        if(response.statusCode == 200){
+          try {
             yield SuccessState(IndexListResponse.fromJson(response.data));
-          }catch(e){
+          } catch (e) {
+          }
+        }
+        ///在请求网络
+        response = await NetReq().get(path: path);
+        if (response.statusCode == 200) {
+          try {
+            yield SuccessState(IndexListResponse.fromJson(response.data));
+          } catch (e) {
             yield ErrorState(msg: e.toString());
           }
         } else {

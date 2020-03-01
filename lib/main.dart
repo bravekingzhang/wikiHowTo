@@ -1,8 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:wiki_howto_zh/page/index.dart';
 import 'package:debounce_throttle/debounce_throttle.dart';
 import 'package:wiki_howto_zh/page/search.dart';
+import 'package:wiki_howto_zh/styles.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() => runApp(MyApp());
 
@@ -51,12 +53,25 @@ class _RootPageState extends State<RootPage> {
           children: <Widget>[
             DrawerHeader(
               child: Center(
-                child: SizedBox(
-                  width: 60.0,
-                  height: 60.0,
-                  child: CircleAvatar(
-                    child: Image.asset('images/ic_launcher.png'),
-                  ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      width: 60.0,
+                      height: 60.0,
+                      child: CircleAvatar(
+                        backgroundImage: CachedNetworkImageProvider(
+                            'https://avatars0.githubusercontent.com/u/4476322?s=460&v=4'),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 6,
+                    ),
+                    Text(
+                      'hz',
+                      style: textTitle.copyWith(color: Colors.white),
+                    )
+                  ],
                 ),
               ),
             ),
@@ -64,7 +79,9 @@ class _RootPageState extends State<RootPage> {
               return ListTile(
                 leading: menuList[index].icon,
                 title: Text(menuList[index].title),
-                onTap: () {},
+                onTap: () {
+                  menuList[index].onTap();
+                },
               );
             }).toList()
           ],
@@ -78,37 +95,54 @@ class _RootPageState extends State<RootPage> {
 class MenuItem {
   Widget icon;
   String title;
+  VoidCallback onTap;
 
-  MenuItem({this.icon, this.title});
+  MenuItem({this.icon, this.title, this.onTap});
 }
 
 List<MenuItem> menuList = [
   MenuItem(
-    icon: Image.asset(
-      'images/featured.png',
-      width: 24,
-    ),
-    title: 'feature',
-  ),
+      icon: Image.asset(
+        'images/featured.png',
+        width: 24,
+        color: Colors.white,
+        colorBlendMode: BlendMode.srcOut,
+      ),
+      title: 'feature',
+      onTap: () {}),
   MenuItem(
-    icon: Image.asset(
-      'images/random.png',
-      width: 24,
-    ),
-    title: 'random',
-  ),
+      icon: Image.asset(
+        'images/random.png',
+        width: 24,
+      ),
+      title: 'random',
+      onTap: () {}),
   MenuItem(
-    icon: Image.asset(
-      'images/bookmark.png',
-      width: 24,
-    ),
-    title: 'bookmark',
-  ),
+      icon: Image.asset(
+        'images/bookmark.png',
+        width: 24,
+      ),
+      title: 'bookmark',
+      onTap: () {}),
   MenuItem(
-    icon: Image.asset(
-      'images/tool.png',
-      width: 24,
-    ),
-    title: 'tool',
-  ),
+      icon: Image.asset(
+        'images/tool.png',
+        width: 24,
+      ),
+      title: 'tool',
+      onTap: () {}),
+  MenuItem(
+      icon: Image.asset(
+        'images/github.png',
+        width: 24,
+      ),
+      title: 'github',
+      onTap: () async {
+        var url = 'https://github.com/bravekingzhang';
+        if (await canLaunch(url)) {
+          await launch(url);
+        } else {
+          throw 'Could not launch $url';
+        }
+      }),
 ];
