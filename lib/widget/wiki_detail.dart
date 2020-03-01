@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:wiki_howto_zh/model/wiki_detail_response.dart';
 import 'package:sticky_headers/sticky_headers.dart';
+import 'package:wiki_howto_zh/sql.dart';
 import 'package:wiki_howto_zh/styles.dart';
+import 'package:toast/toast.dart';
+
 
 class HeadTitle {
   String title;
@@ -25,9 +28,6 @@ class TipBody {
 
 class WikiDetail extends StatelessWidget {
   final App data;
-  Sections steps;
-  Sections tips;
-  Sections warnings;
   List items = [];
 
   WikiDetail(wiKiDetailResponse) : data = wiKiDetailResponse.app {
@@ -40,7 +40,7 @@ class WikiDetail extends StatelessWidget {
         continue;
       }
       if (section.type.indexOf('steps') != -1) {
-        steps = section;
+        Sections steps = section;
         items.add(HeadTitle(steps.heading));
         for (var method in steps.methods) {
           items.add(SubHeadTitle(method.name));
@@ -50,14 +50,14 @@ class WikiDetail extends StatelessWidget {
         }
       }
       if (section.type.indexOf('warnings') != -1) {
-        warnings = section;
+        Sections warnings = section;
         items.add(HeadTitle(warnings.heading));
         for (var method in warnings.list) {
           items.add(TipBody(method.html));
         }
       }
       if (section.type.indexOf('tips') != -1) {
-        tips = section;
+        Sections tips = section;
         items.add(HeadTitle(tips.heading));
         for (var method in tips.list) {
           items.add(TipBody(method.html));
@@ -85,10 +85,17 @@ class WikiDetail extends StatelessWidget {
           actions: <Widget>[
             IconButton(
               icon: Icon(
-                Icons.share,
-                color: Colors.white,
+                Icons.star,
+                color: Colors.redAccent,
               ),
-              onPressed: () {},
+              onPressed: ()async {
+                try{
+                  await WikiProvider().insert(WikiCollectItem(data.title, data.image.url, data.id));
+                  Toast.show("收藏成功", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+                }catch(e){
+                  Toast.show("已收藏", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+                }
+              },
             )
           ],
         ),

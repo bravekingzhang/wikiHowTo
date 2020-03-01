@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class MyErrorWidget extends StatelessWidget {
   final String msg;
 
@@ -8,7 +9,14 @@ class MyErrorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: Column(
-          children: <Widget>[Icon(Icons.error), Text(msg)],
-        ));
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Image.asset('images/cry.png',width: 64,),
+        SizedBox(
+          height: 15,
+        ),
+        Text(msg,textAlign: TextAlign.center,)
+      ],
+    ));
   }
 }

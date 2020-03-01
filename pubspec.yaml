@@ -29,6 +29,7 @@ dependencies:
   sticky_headers: "^0.1.8"
   disk_lru_cache: ^0.0.2
   url_launcher: ^5.4.2
+  toast: ^0.1.5
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -58,6 +59,8 @@ flutter:
     - images/random.png
     - images/tool.png
     - images/github.png
+    - images/cry.png
+    - images/empty.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

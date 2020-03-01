@@ -5,7 +5,7 @@ import 'package:wiki_howto_zh/model/search_response.dart';
 import 'package:wiki_howto_zh/model/wiki_detail_response.dart';
 import 'package:wiki_howto_zh/network_request.dart';
 
-class WiKiDetailBloc extends BaseBloc {
+class SearchBloc extends BaseBloc {
   @override
   Stream<BaseState> mapEventToState(BaseEvent event) async* {
     switch (event.runtimeType) {

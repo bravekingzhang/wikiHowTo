@@ -1,14 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:toast/toast.dart';
+import 'package:wiki_howto_zh/page/collect.dart';
 import 'package:wiki_howto_zh/page/index.dart';
-import 'package:debounce_throttle/debounce_throttle.dart';
 import 'package:wiki_howto_zh/page/search.dart';
 import 'package:wiki_howto_zh/styles.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void main() => runApp(MyApp());
 
-final _debouncer = Debouncer<String>(Duration(milliseconds: 200));
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -80,7 +80,7 @@ class _RootPageState extends State<RootPage> {
                 leading: menuList[index].icon,
                 title: Text(menuList[index].title),
                 onTap: () {
-                  menuList[index].onTap();
+                  menuList[index].onTap(context);
                 },
               );
             }).toList()
@@ -95,7 +95,7 @@ class _RootPageState extends State<RootPage> {
 class MenuItem {
   Widget icon;
   String title;
-  VoidCallback onTap;
+  ValueChanged onTap;
 
   MenuItem({this.icon, this.title, this.onTap});
 }
@@ -108,41 +108,52 @@ List<MenuItem> menuList = [
         color: Colors.white,
         colorBlendMode: BlendMode.srcOut,
       ),
-      title: 'feature',
-      onTap: () {}),
-  MenuItem(
-      icon: Image.asset(
-        'images/random.png',
-        width: 24,
-      ),
-      title: 'random',
-      onTap: () {}),
+      title: '本期推荐',
+      onTap: (context) {
+        Navigator.of(context).pop();
+      }),
+//  MenuItem(
+//      icon: Image.asset(
+//        'images/random.png',
+//        width: 24,
+//      ),
+//      title: 'random',
+//      onTap: () {}),
   MenuItem(
       icon: Image.asset(
         'images/bookmark.png',
         width: 24,
       ),
-      title: 'bookmark',
-      onTap: () {}),
+      title: '收藏',
+      onTap: (context) {
+        Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+          return Collect();
+        }));
+        Navigator.of(context).pop();
+      }),
   MenuItem(
       icon: Image.asset(
         'images/tool.png',
         width: 24,
       ),
-      title: 'tool',
-      onTap: () {}),
+      title: '应急工具',
+      onTap: (context) {
+        Toast.show("噢，还在开发中..", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+        Navigator.of(context).pop();
+      }),
   MenuItem(
       icon: Image.asset(
         'images/github.png',
         width: 24,
       ),
       title: 'github',
-      onTap: () async {
+      onTap: (context) async {
         var url = 'https://github.com/bravekingzhang';
         if (await canLaunch(url)) {
           await launch(url);
         } else {
           throw 'Could not launch $url';
         }
+        Navigator.of(context).pop();
       }),
 ];

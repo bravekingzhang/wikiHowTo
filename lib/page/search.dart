@@ -1,9 +1,14 @@
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flappy_search_bar/flappy_search_bar.dart';
-import 'package:flappy_search_bar/scaled_tile.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:wiki_howto_zh/model/search_response.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wiki_howto_zh/bloc/base_bloc.dart';
+import 'package:wiki_howto_zh/bloc/search.dart';
 import 'package:wiki_howto_zh/page/detail.dart';
+import 'package:wiki_howto_zh/widget/error.dart';
+import 'package:wiki_howto_zh/widget/search_bar.dart';
 
 class Search extends StatefulWidget {
   @override
@@ -11,61 +16,96 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  SearchBarController _searchBarController;
   bool isReplay = false;
+  SearchBloc searchBloc;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _searchBarController = SearchBarController();
+    searchBloc = SearchBloc();
+    searchBloc.add(SearchFEvent.init('aaron'));
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    searchBloc.close();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SearchBar<Docs>(
-          searchBarPadding: EdgeInsets.symmetric(horizontal: 10),
-          headerPadding: EdgeInsets.symmetric(horizontal: 10),
-          listPadding: EdgeInsets.symmetric(horizontal: 10),
-          onSearch: _getAllSearch,
-          searchBarController: _searchBarController,
-          placeHolder: Text("placeholder"),
-          cancellationWidget: Text("取消"),
-          emptyWidget: Text("empty"),
-          indexedScaledTileBuilder: (int index) =>
-              ScaledTile.count(1, index.isEven ? 2 : 1),
-          onCancelled: () {
-            Navigator.of(context).pop();
-          },
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-          crossAxisCount: 2,
-          onItemFound: (Docs post, int index) {
-            return Container(
-              color: Colors.lightBlue,
-              child: ListTile(
-                leading: CachedNetworkImage(
-                  imageUrl: post.image58x58,
-                  width: 58,
-                  height: 58,
-                ),
-                title: Text(post.title),
-                onTap: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => Detail(post.id)));
-                },
-              ),
-            );
-          },
-        ),
-      ),
+          child: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            automaticallyImplyLeading: false,
+            pinned: true,
+            expandedHeight: 50.0,
+            title: SearchBar(
+              onSearch: (value) {
+                searchBloc.add(SearchQEvent.init(value));
+              },
+            ),
+          ),
+          BlocBuilder(
+            bloc: searchBloc,
+            builder: (BuildContext context, state) {
+              switch (state.runtimeType) {
+                case LoadingState:
+                  return SliverFixedExtentList(
+                      itemExtent: 150.0,
+                      delegate: SliverChildBuilderDelegate(
+                          (BuildContext context, int index) {
+                        return Center(child: CircularProgressIndicator());
+                      }, childCount: 1));
+                case SuccessState:
+                  SuccessState successState = state;
+                  return SliverFixedExtentList(
+                    itemExtent: 60.0,
+                    delegate: SliverChildBuilderDelegate(
+                        (BuildContext context, int index) {
+                      return Container(
+                        decoration: BoxDecoration(border: Border(bottom: BorderSide())),
+                        child: ListTile(
+                          contentPadding: EdgeInsets.fromLTRB(8, 6, 0, 8),
+                          dense: true,
+                          leading: CachedNetworkImage(
+                            width: 48,
+                            height: 48,
+                            imageUrl: successState
+                                .response.response.docs[index].image58x58,
+                          ),
+                          title: Text(
+                              successState.response.response.docs[index].title),
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (BuildContext context) {
+                              return Detail(successState
+                                  .response.response.docs[index].id);
+                            }));
+                          },
+                        ),
+                      );
+                    },
+                        childCount: min(successState.response.response.numFound,
+                            successState.response.response.docs?.length ?? 0)),
+                  );
+                default:
+                  ErrorState errorState = state;
+                  return SliverFixedExtentList(
+                      itemExtent: 150.0,
+                      delegate: SliverChildBuilderDelegate(
+                          (BuildContext context, int index) {
+                        return Center(child: MyErrorWidget(errorState.msg));
+                      }, childCount: 1));
+              }
+            },
+          ),
+        ],
+      )),
     );
-  }
-
-  Future<List<Docs>> _getAllSearch(text) {
-    print(text);
-    return Future.value([]);
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wiki_howto_zh/bloc/base_bloc.dart';
@@ -48,8 +50,13 @@ class _DetailState extends State<Detail> {
                 SuccessState successState = state;
                 return WikiDetail(successState.response);
               default:
-                ErrorState errorState = state;
-                return MyErrorWidget(errorState.msg);
+//                ErrorState errorState = state;
+                return SizedBox(
+                  height: window.physicalSize.height,
+                  child: Center(
+                    child: MyErrorWidget('很抱歉，文章未找到~~，\n可能是中文api搜不到英文详情'),
+                  ),
+                );
             }
           },
         ),
