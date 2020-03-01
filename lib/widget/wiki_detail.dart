@@ -104,7 +104,7 @@ class WikiDetail extends StatelessWidget {
                 SliverChildBuilderDelegate((BuildContext context, int index) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(data.abstract),
+            child: Text(data.abstract.replaceAll(RegExp(r"(ht|f)tp(s?)\:\/\/[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%$#_]*)?"), "")),
           );
         }, childCount: 1)),
         SliverList(

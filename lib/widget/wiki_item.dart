@@ -36,7 +36,7 @@ class WiKiItem extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                article.abstract,
+                article.abstract.replaceAll(RegExp(r"(ht|f)tp(s?)\:\/\/[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%$#_]*)?"), ""),
                 style: textBodyHint,
               ),
             )
