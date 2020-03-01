@@ -30,6 +30,9 @@ dependencies:
   disk_lru_cache: ^0.0.2
   url_launcher: ^5.4.2
   toast: ^0.1.5
+  video_player: ^0.10.8+1
+  chewie: ^0.9.8+1
+  neeko: ^0.0.6
 
 
   # The following adds the Cupertino Icons font to your application.

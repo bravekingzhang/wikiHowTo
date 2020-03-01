@@ -20,7 +20,14 @@ class WiKiDetailBloc extends BaseBloc {
           try {
             print("命中缓存");
             yield SuccessState(WiKiDetailResponse.fromJson(response.data));
-          } catch (e) {}
+          } catch (e) {
+            response = await NetReq().get(path: 'https://www.wikihow.com'+path);
+            try {
+              yield SuccessState(WiKiDetailResponse.fromJson(response.data));
+            } catch (e) {
+              yield ErrorState(msg: e.toString());
+            }
+          }
         }
 
         ///在请求网络
@@ -30,7 +37,12 @@ class WiKiDetailBloc extends BaseBloc {
           try {
             yield SuccessState(WiKiDetailResponse.fromJson(response.data));
           } catch (e) {
-            yield ErrorState(msg: e.toString());
+            response = await NetReq().get(path: 'https://www.wikihow.com'+path);
+            try {
+              yield SuccessState(WiKiDetailResponse.fromJson(response.data));
+            } catch (e) {
+              yield ErrorState(msg: e.toString());
+            }
           }
         } else {
           yield ErrorState(msg: 'response Error ${response.statusCode}');

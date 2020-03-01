@@ -9,7 +9,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 void main() => runApp(MyApp());
 
-
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -125,8 +124,9 @@ List<MenuItem> menuList = [
         width: 24,
       ),
       title: '收藏',
-      onTap: (context) {
-        Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+      onTap: (context) async {
+        await Navigator.of(context)
+            .push(MaterialPageRoute(builder: (BuildContext context) {
           return Collect();
         }));
         Navigator.of(context).pop();
@@ -138,7 +138,8 @@ List<MenuItem> menuList = [
       ),
       title: '应急工具',
       onTap: (context) {
-        Toast.show("噢，还在开发中..", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+        Toast.show("噢，还在开发中..", context,
+            duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
         Navigator.of(context).pop();
       }),
   MenuItem(
