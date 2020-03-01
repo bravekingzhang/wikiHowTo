@@ -4,6 +4,8 @@ Wiki How to 的中文版本，觉得挺有意思的，希望大家一起把这�
 
 ## 介绍
 
+<img title="" src="https://github.com/bravekingzhang/wikiHowTo/blob/master/art/1583063972.png" alt="" data-align="center" width="616">
+
 ![添加二维码体验](https://github.com/bravekingzhang/wikiHowTo/blob/master/art/1583063972.png)
 
 目前支持的功能有：
