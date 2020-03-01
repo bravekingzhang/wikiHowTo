@@ -2,18 +2,21 @@
 
 Wiki How to 的中文版本，觉得挺有意思的，希望大家一起把这个项目维护起来
 
-## Getting Started
+## 介绍
 
-This project is a starting point for a Flutter application.
+目前支持的功能有：
+1、支持显示推荐列表
+2、支持搜索，但是只能搜索到英文的，因为api不支持搜索到中文的
+3、查看详情
+4、详情里面播放视频的功能
+5、显示html文本
+6、支持收藏
+7、支持从收藏移除
+8、对请求做了缓存，先请求缓存，在请求网络。
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
 
 #### todo
 搜索 API不支持搜索中文，搜索结果返回是空的，需要找官方解决
