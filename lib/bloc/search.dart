@@ -3,7 +3,7 @@ import 'package:wiki_howto_zh/bloc/base_bloc.dart';
 import 'package:wiki_howto_zh/model/index_list_response.dart';
 import 'package:wiki_howto_zh/model/search_response.dart';
 import 'package:wiki_howto_zh/model/wiki_detail_response.dart';
-import 'package:wiki_howto_zh/network_request.dart';
+import 'package:wiki_howto_zh/network/network_request.dart';
 
 class SearchBloc extends BaseBloc {
   @override

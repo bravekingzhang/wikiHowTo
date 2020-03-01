@@ -4,7 +4,7 @@ import 'package:toast/toast.dart';
 import 'package:wiki_howto_zh/page/collect.dart';
 import 'package:wiki_howto_zh/page/index.dart';
 import 'package:wiki_howto_zh/page/search.dart';
-import 'package:wiki_howto_zh/styles.dart';
+import 'package:wiki_howto_zh/style/styles.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void main() => runApp(MyApp());

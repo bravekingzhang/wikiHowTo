@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:wiki_howto_zh/model/wiki_detail_response.dart';
 import 'package:sticky_headers/sticky_headers.dart';
-import 'package:wiki_howto_zh/sql.dart';
-import 'package:wiki_howto_zh/styles.dart';
+import 'package:wiki_howto_zh/sql/sql.dart';
+import 'package:wiki_howto_zh/style/styles.dart';
 import 'package:toast/toast.dart';
 
 

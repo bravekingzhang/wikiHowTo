@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wiki_howto_zh/bloc/base_bloc.dart';
 import 'package:wiki_howto_zh/bloc/collect.dart';
 import 'package:wiki_howto_zh/page/detail.dart';
-import 'package:wiki_howto_zh/sql.dart';
+import 'package:wiki_howto_zh/sql/sql.dart';
 import 'package:wiki_howto_zh/widget/error.dart';
 import 'package:toast/toast.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:wiki_howto_zh/model/index_list_response.dart';
 import 'package:wiki_howto_zh/page/detail.dart';
-import 'package:wiki_howto_zh/styles.dart';
+import 'package:wiki_howto_zh/style/styles.dart';
 class WiKiItem extends StatelessWidget {
   final Articles article;
 

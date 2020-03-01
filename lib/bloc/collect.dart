@@ -1,5 +1,5 @@
 import 'package:wiki_howto_zh/bloc/base_bloc.dart';
-import 'package:wiki_howto_zh/sql.dart';
+import 'package:wiki_howto_zh/sql/sql.dart';
 
 class CollectBloc extends BaseBloc {
   WikiProvider _wikiProvider;
